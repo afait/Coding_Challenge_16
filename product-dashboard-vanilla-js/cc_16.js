@@ -11,10 +11,11 @@ function fetchProductsThen() {
         })
         // if there is no error it returns the json
         .then(data => {
-            data.forEach(product => {
-                console.log(product.name);
-            });
-        }) 
+            console.log(data)
+                displayProducts(data)
+})
+
+        
         // Logs the data from the array using all the product names
         .catch(error => {
             console.error('An Error Has Occured:', error);
@@ -33,43 +34,22 @@ async function fetchProductsAsync() {
             throw new Error ('Error with network');
         }
         // If there is an error connecting the console will show "Error with network"
+
         const products = await response.json();
         displayProducts(products);
-        // Displays all of teh products
+        console.log(products);
     } catch (error) {
         handleError(error)
-    };
+    }};
     // If an error occurs, it gets passed to handleError
-    function displayProducts(products) {
-        const productList = document.getElementById('list of products');
-// Created a function to show all of the products
 
-        products.forEach(product => {
-            const productElement = document.createElement('div');
-            productElement.classList.add('product');
-            productElement.textContent = product.name; 
-            productList.appendChild(productElement);
-          });
-          // Appends the previous product list
-        }
         
-        function handleError(error) {
-          console.error('Error fetching products:', error);
-          // If there is an error it gets passed to this handleError which will log "Error fetching products" and display the name of the error that occurred
-          const errorElement = document.createElement('div');
-          errorElement.classList.add('error');
-          errorElement.textContent = 'Failed to load products. Please try again later.';
-          document.body.appendChild(errorElement);
-        }
-    };
-
 
     // Task 4 - Display the Products
 
     function displayProducts(products) {
-        const productContainer = document.getElementById('Product Container');
+        const productContainer = document.getElementById('product-container');
     // Creates function to show all of the products 
-        
         
         for (let i = 0; i < products.length && i < 5; i++) {
             const product = products[i];
@@ -80,7 +60,7 @@ async function fetchProductsAsync() {
             productElement.classList.add('product');
     
             const productName = document.createElement('h3');
-            productName.textContent = product.name;
+            productName.textContent = product.fields.name;
             // Names each product
     
             const productPrice = document.createElement('p');
@@ -88,7 +68,7 @@ async function fetchProductsAsync() {
             // Sets the price of the product and rounds to 2 decimal places
     
             const productImage = document.createElement('img');
-            productImage.src = product.imageUrl; 
+            productImage.src = product.fields.image[0].url; 
             
             productElement.appendChild(productName);
             productElement.appendChild(productPrice);
@@ -109,4 +89,7 @@ async function fetchProductsAsync() {
     };
 
 
-    
+    // Task 6 - Call Your Fetch Functions
+
+    fetchProductsThen();
+    fetchProductsAsync();
