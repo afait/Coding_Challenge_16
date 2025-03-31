@@ -62,3 +62,40 @@ async function fetchProductsAsync() {
           document.body.appendChild(errorElement);
         }
     };
+
+
+    // Task 4 - Display the Products
+
+    function displayProducts(products) {
+        const productContainer = document.getElementById('Product Container');
+    // Creates function to show all of the products 
+        
+        
+        for (let i = 0; i < products.length && i < 5; i++) {
+            const product = products[i];
+    // Loops and adds products until there are five products
+
+            
+            const productElement = document.createElement('div');
+            productElement.classList.add('product');
+    
+            const productName = document.createElement('h3');
+            productName.textContent = product.name;
+            // Names each product
+    
+            const productPrice = document.createElement('p');
+            productPrice.textContent = `$${product.price.toFixed(2)}`;
+            // Sets the price of the product and rounds to 2 decimal places
+    
+            const productImage = document.createElement('img');
+            productImage.src = product.imageUrl; 
+            
+            productElement.appendChild(productName);
+            productElement.appendChild(productPrice);
+            productElement.appendChild(productImage);
+
+            // Appends the products name, price and image
+    
+            productContainer.appendChild(productElement);
+        };
+    }
