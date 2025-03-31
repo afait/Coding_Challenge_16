@@ -99,3 +99,14 @@ async function fetchProductsAsync() {
             productContainer.appendChild(productElement);
         };
     }
+
+
+    // Task 5 - Resuable Error Hangler
+
+    function handleError(error) {
+        console.error("An error has occurred", error.message)
+        // Created reusable handleError function
+    };
+
+
+    
